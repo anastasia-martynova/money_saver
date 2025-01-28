@@ -1,0 +1,52 @@
+html{
+    background-color: rgb(240, 240, 240);
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.header{
+    background-color: white;
+    color: black;
+    height: 50px;
+    padding-top: 12px;
+    padding-left: 20px;
+}
+
+nav li:hover{
+    background-color: rgb(222, 222, 222);
+}
+
+nav ul{
+    list-style: none;
+    display: flex;
+    gap: 20px;
+}
+
+nav li {
+    display: inline-block;
+    padding: 5px;
+}
+
+.logo{
+    color: rgb(255, 217, 0);
+    font-weight: bold;
+    font-size: larger;
+}
+
+.expense_card{
+    position: relative;
+    background-color: white;
+    top: 150px;
+    left: 100px;;
+    height: 400px;
+    width: 400px;
+}
+
+.expense_card__label {
+    position: relative;
+    padding: 15px;
+    font-size: 24px;
+}
+
+.expense_card__image {
+    height: 200px;
+}
