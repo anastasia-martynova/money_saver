@@ -7,24 +7,31 @@
     <link href="index.css" rel="stylesheet">
     <link href="reset.css" rel="stylesheet">
   </head>
-  
+
   <body>
     <nav class="header">
-      <ul>
+        <ul>
         <li class="logo">Монетка</li>
         <li><a href="index.html">Дашборд</a></li>
         <li><a href="analysis.html">Анализ расходов</a></li>
         <li><a href="planning.html">Планирование</a></li>
         <li><a href="categories.html">Категории</a></li>
-      </ul>
+        </ul>
     </nav>
+  
+    <div class="dashboard_wrapper">
+          <div class="expense_card">
+              <h3 class="expense_card__label">Потрачено в январе 465р</h3>
+              <h4 class="expense_card__new_expense_logo">Новая трата</h4>
+      
+              <img class="expense_card__image" src="coin.png">
 
-    <div class="expense_card">
-        <h3 class="expense_card__label">Потрачено в январе 465р</h3>
-        <h4>Новая трата</h4>
+              <button class="expense_card__button">Добавить</button>
+          </div>
 
-        <img class="expense_card__image" src="coin.png">
+          <div class="expenses_list">
 
+          </div>
     </div>
     
   </body>
