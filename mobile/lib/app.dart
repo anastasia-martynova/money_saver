@@ -12,12 +12,12 @@ class MoneySaverApp extends StatelessWidget {
         [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
 
     return CupertinoApp(
-      home: CupertinoStoreHomePage(),
+      home: MoneySaverHome(),
     );
   }
 }
 
-class CupertinoStoreHomePage extends StatelessWidget {
+class MoneySaverHome extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CupertinoTabScaffold(
@@ -33,6 +33,9 @@ class CupertinoStoreHomePage extends StatelessWidget {
           case 1:
             return CupertinoTabView(builder: (context) {
               return CupertinoPageScaffold(
+                navigationBar: CupertinoNavigationBar(
+                  middle: const Text('Добавление траты'),
+                ),
                 child: AddExpenseView(),
               );
             });
