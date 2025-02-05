@@ -1,23 +1,40 @@
 const http = require("http");
 const fs = require("fs");
+const { join } = require("path");
+const { json } = require("stream/consumers");
+  
+const pathToFilename = {
+    "/": "index.html",
+    "/analysis": "analysis.html",
+    "/categories": "categories.html",
+    "/planning": "planning.html",
+    "/api/expenses": "expenses.json"
+}
 
-http.createServer(function (request, response) {
-    // TODO 
-    // Смотришь на реквест, если / то дашборд, если analytics, то отдаешь analytics и тд
-    // 404.html страничку
-
+http.createServer(function(request, response){
+      
     console.log(`Запрошенный адрес: ${request.url}`);
-    response.sendDate()
-    const filePath = request.url.substring(1);
-    fs.access(filePath, fs.constants.R_OK, err => {
-        if (err) {
+
+    let filePath = pathToFilename[request.url] ?? request.url.substring(1)
+
+    fs.readFile(filePath, function(error, data){
+              
+        if(error){
             response.statusCode = 404;
-            response.end("Resourse not found!");
-        }
-        else {
-            fs.createReadStream(filePath).pipe(response);
+            fs.readFile('404.html', function(error, data) {
+                response.end(data);
+            });
+        }   
+        else{
+            if (filePath == "expenses.json") {
+                console.log(JSON.stringify(JSON.parse(data)))
+                response.setHeader("Content-Type", "application/json; charset=utf-8;")
+                response.end(JSON.stringify(JSON.parse(data)))
+                return
+            }
+            response.end(data);
         }
     });
-}).listen(3000, function () {
+}).listen(3000, function(){
     console.log("Server started at 3000");
 });
