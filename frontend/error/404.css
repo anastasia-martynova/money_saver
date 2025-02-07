@@ -4,6 +4,7 @@
     display: block;
     background-color: rgb(127, 232, 255);
     border-radius: 10px;
+}
 
 .error_wrapper__name_label{
     text-align: center;
