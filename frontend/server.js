@@ -29,6 +29,12 @@ const data = {
         date: new Date(),
         cost: 700,
         category: "grocery",
+      },
+    {
+        expenseId: "3",
+        date: new Date(),
+        cost: 1700,
+        category: "grocery",
       }
   ],
 };

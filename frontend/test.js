@@ -1,6 +1,6 @@
 const dateOptions = {month: 'long', day: 'numeric'}
 
-function createAndAddNewExpense(expenseId, date, cost, category){
+function renderExpense(expenseId, date, cost, category){
   const newDiv = document.createElement("div")
   const newSpanDate = document.createElement("span")
   const newSpanPrice = document.createElement("span")
@@ -13,6 +13,8 @@ function createAndAddNewExpense(expenseId, date, cost, category){
   newSpanIconWrapper.className = "expenses_list__item_icon_wrapper"
   newImgIcon.className = "expenses_list__item_icon_image"
   newImgIcon.src = "assets/shopping_cart.png"
+  newSpanDate.innerText = new Date(date).toLocaleDateString("en-US", dateOptions)
+  newSpanPrice.innerText = `${cost} р`
 
   newDiv.appendChild(newSpanDate)
   newDiv.appendChild(newSpanPrice)
@@ -21,15 +23,11 @@ function createAndAddNewExpense(expenseId, date, cost, category){
 
   const currentDiv = document.getElementsByClassName("expenses_list__wrapper_list")[0]
   currentDiv.appendChild(newDiv)
-
-  let newDate = new Date(date)
-  document.getElementsByClassName("expenses_list__item_date")[expenseId].textContent = newDate.toLocaleDateString("en-US", dateOptions)
-  document.getElementsByClassName("expenses_list__item_price")[expenseId].textContent = `${cost} р`
 }
 
-function addAllExpensesToHtml(data){
+function renderExpenses(data){
   data.expenses.forEach(expense => {
-    createAndAddNewExpense(expense.expenseId, expense.date, expense.cost, expense.category)
+    renderExpense(expense.expenseId, expense.date, expense.cost, expense.category)
   });
 }
 
@@ -38,5 +36,5 @@ fetch('http://localhost:3000/api/expenses')
     return response.json()
   })
   .then((data) => {
-    addAllExpensesToHtml(data)
+    renderExpenses(data)
   });
