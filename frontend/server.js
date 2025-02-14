@@ -10,6 +10,12 @@ const pathToFilename = {
   "/planning": "planning/planning.html",
 };
 
+function delay(timeMS){
+  return new Promise(function(resolve, reject) {
+    setTimeout(function () {resolve()}, timeMS)}
+  )
+}
+
 const data = {
   expenses: [
     {
@@ -39,10 +45,15 @@ const data = {
   ],
 };
 
-function handleAPIRequests(path, response) {
+async function handleAPIRequests(path, response) {
   response.setHeader("Content-Type", "application/json; charset=utf-8;");
   if (path === "/api/expenses") {
-    response.end(JSON.stringify(data));
+    // замедлить запрос на 3 секунды
+    // promise, async await - асинхронность
+    // setTimeout
+    delay(3000)
+    .then(() => {response.end(JSON.stringify(data))})
+    response.end()
   }
 }
 
