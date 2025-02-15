@@ -118,8 +118,8 @@ li:link{
 
 .expense_card__calendar_wrapper{
     background-color: rgb(255, 217, 0);
-    height: 80px;
-    width: 80px;
+    height: 40px;
+    width: 40px;
     border-radius: 50px;
 }
 
@@ -128,9 +128,9 @@ li:link{
 }
 
 .expense_card__calendar_icon{
-    height: 50px;
-    margin-top: 14px;
-    margin-left: 2px;
+    height: 25px;
+    margin-top: 8px;
+    margin-left: 1px;
 }
 
 .expense_card__calendar_date{
@@ -140,8 +140,8 @@ li:link{
 
 .expense_card__choose_icons{
     background-color: rgb(255, 217, 0);
-    height: 80px;
-    width: 80px;
+    height: 40px;
+    width: 40px;
     border-radius: 50px;
 }
 
@@ -156,8 +156,8 @@ li:link{
 
 .expense_card__expense_num_wrapper{
     background-color: rgb(255, 217, 0);
-    height: 80px;
-    width: 80px;
+    height: 40px;
+    width: 40px;
     border-radius: 50px;
     display: flex;
     justify-content: center;
@@ -173,6 +173,22 @@ li:link{
     color: white;
     font-weight: 600;
     font-size: 20px;
+}
+
+.expense_card__form{
+    margin: 20px;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.expense_card__form__input_amount{
+    margin-left: 10px;
+    border: 1px, solid, black;
+}
+
+.expense_card__form__choose_date_wrapper{
+    margin-top: 10px;
 }
 
 

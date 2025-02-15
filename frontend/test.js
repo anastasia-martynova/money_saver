@@ -17,9 +17,6 @@ function hideLoader() {
   loaderDiv.remove()
 }
 
-
-
-
 function renderExpense(expenseId, date, cost, category){
   const newDiv = document.createElement("div")
   const newSpanDate = document.createElement("span")
@@ -53,6 +50,11 @@ function renderExpenses(data){
 
 renderLoader()
 
+const expenseBtn = document.getElementsByClassName("expense_card__button")[0];
+const expenseAmount = document.getElementsByClassName("expense_card__form__input_amount")[0];
+const expenseDate = document.getElementsByClassName("expense_card__form__input_date")[0];
+
+
 fetch('http://localhost:3000/api/expenses')
   .then((response) => {
     return response.json()
@@ -60,19 +62,23 @@ fetch('http://localhost:3000/api/expenses')
   .then((data) => {
     hideLoader()
     renderExpenses(data)
-  }).then((data) => console.log(data));
+  })
 
-// document.onreadystatechange = function () {
-//   if (document.getElementsByClassName(
-//     "expenses_list__wrapper_list").readyState !== "complete") {
-//       document.getElementsByClassName(
-//           "expenses_list__wrapper_list").style.visibility = "hidden";
-//       document.getElementsByClassName(
-//           "expenses_list__loader").style.visibility = "visible";
-//   } else {
-//       document.getElementsByClassName(
-//           "expenses_list__loader").style.visibility = "hidden";
-//       document.getElementsByClassName(
-//           "expenses_list__wrapper_list").style.visibility = "visible";
-//   }
-// }
+
+expenseBtn.addEventListener("click", function(){
+  console.log('click')
+  let expense = {
+    date: expenseDate.value,
+    cost: expenseAmount.value,
+    category: "grocery"
+  }
+  fetch('http://localhost:3000/api/send_new_expense', {
+    method: "POST",
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(expense)
+  })
+  
+})

@@ -45,16 +45,25 @@ const data = {
   ],
 };
 
-async function handleAPIRequests(path, response) {
+function handleAPIRequests(request, response) {
   response.setHeader("Content-Type", "application/json; charset=utf-8;");
-  if (path === "/api/expenses") {
-    // замедлить запрос на 3 секунды
-    // promise, async await - асинхронность
-    // setTimeout
-    delay(3000)
-    .then(() => {response.end(JSON.stringify(data))})
-    response.end()
+  if (request.url === "/api/expenses") {
+    response.end(JSON.stringify(data))
   }
+  if (request.url.includes("send_new_expense")){
+    var postValue = ''
+    request.on("data", function(chunk) {
+        console.log(chunk)
+        console.log("----------")
+        postValue += chunk
+    })
+    request.on("end", () => {
+        console.log('PostData:', postValue)
+        data.expenses.push(JSON.parse(postValue))
+        console.log(data.expenses)
+        response.end()
+    })
+}
 }
 
 function handleStatic(url, response) {
@@ -77,8 +86,9 @@ function isApiRequest(request) {
 
 http
   .createServer(function (request, response) {
+
     if (isApiRequest(request)) {
-      handleAPIRequests(request.url, response);
+      handleAPIRequests(request, response);
       return;
     }
 

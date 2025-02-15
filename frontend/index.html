@@ -29,7 +29,7 @@
 
               <button class="expense_card__button">Добавить</button>
 
-              <div class="expense_card__choosing_wrapper">
+              <!-- <div class="expense_card__choosing_wrapper">
                 <button class="expense_card__calendar_wrapper">
                   <img class="expense_card__calendar_icon" src="assets/calendar.png">
                   <p class="expense_card__calendar_date">31.01.2025</p>
@@ -44,7 +44,18 @@
                     670р
                   </p>
                 </button>
-              </div>
+              </div> -->
+
+              <form class="expense_card__form">
+                <div class="expense_card__form__expense_amount_wrapper">
+                  <label for="expenseAmount">Expense amount: </label> 
+                  <input type="text" class="expense_card__form__input_amount">
+                </div>
+                <div class="expense_card__form__choose_date_wrapper">
+                  <label for="expenseDate">Choose date: </label> 
+                  <input type="date" class="expense_card__form__input_date" value="2018-07-22">
+                </div>
+              </form>
         
           </div>
 
