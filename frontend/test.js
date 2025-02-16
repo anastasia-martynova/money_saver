@@ -1,6 +1,7 @@
 const dateOptions = {month: 'long', day: 'numeric'}
 
 function renderLoader() {
+  const currentDiv = document.getElementsByClassName("expenses_list__wrapper_list")[0]
   const newDiv = document.createElement("div")
   const newTextLoading = document.createElement("span")
   newDiv.className = "expenses_list__item_wrapper_load"
@@ -8,7 +9,6 @@ function renderLoader() {
   newTextLoading.innerText = "Loading..."
 
   newDiv.appendChild(newTextLoading)
-  const currentDiv = document.getElementsByClassName("expenses_list__wrapper_list")[0]
   currentDiv.appendChild(newDiv)
 }
 
@@ -18,6 +18,7 @@ function hideLoader() {
 }
 
 function renderExpense(expenseId, date, cost, category){
+  const currentDiv = document.getElementsByClassName("expenses_list__wrapper_list")[0]
   const newDiv = document.createElement("div")
   const newSpanDate = document.createElement("span")
   const newSpanPrice = document.createElement("span")
@@ -37,13 +38,15 @@ function renderExpense(expenseId, date, cost, category){
   newDiv.appendChild(newSpanPrice)
   newDiv.appendChild(newSpanIconWrapper)
   newSpanIconWrapper.appendChild(newImgIcon)
-
-  const currentDiv = document.getElementsByClassName("expenses_list__wrapper_list")[0]
   currentDiv.appendChild(newDiv)
 }
 
 function renderExpenses(data){
+  const currentDiv = document.getElementsByClassName("expenses_list__wrapper_list")[0]
+  currentDiv.innerHTML = ''
+
   data.expenses.forEach(expense => {
+    console.log(expense)
     renderExpense(expense.expenseId, expense.date, expense.cost, expense.category)
   });
 }
@@ -60,6 +63,7 @@ fetch('http://localhost:3000/api/expenses')
     return response.json()
   })
   .then((data) => {
+    console.log(data)
     hideLoader()
     renderExpenses(data)
   })
@@ -72,13 +76,19 @@ expenseBtn.addEventListener("click", function(){
     cost: expenseAmount.value,
     category: "grocery"
   }
-  fetch('http://localhost:3000/api/send_new_expense', {
+  fetch('/api/new_expense', {
     method: "POST",
     headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json'
     },
     body: JSON.stringify(expense)
-  })
+  }).then(() => {fetch('http://localhost:3000/api/expenses')
+    .then((response) => {
+      return response.json()
+    })
+    .then((data) => {
+      renderExpenses(data)
+    })})
   
 })

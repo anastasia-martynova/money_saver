@@ -48,19 +48,20 @@ const data = {
 function handleAPIRequests(request, response) {
   response.setHeader("Content-Type", "application/json; charset=utf-8;");
   if (request.url === "/api/expenses") {
-    response.end(JSON.stringify(data))
+    sorted_data = structuredClone(data);
+    sorted_data.expenses.sort(function(a, b){
+      return new Date(b.date) - new Date(a.date);
+    })
+    response.end(JSON.stringify(sorted_data))
   }
-  if (request.url.includes("send_new_expense")){
-    var postValue = ''
+  if (request.url.includes("new_expense")){
+    let postValue = ''
     request.on("data", function(chunk) {
-        console.log(chunk)
         console.log("----------")
         postValue += chunk
     })
     request.on("end", () => {
-        console.log('PostData:', postValue)
         data.expenses.push(JSON.parse(postValue))
-        console.log(data.expenses)
         response.end()
     })
 }

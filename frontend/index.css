@@ -226,6 +226,7 @@ li:link{
 
 .expenses_list__item_date{
     font-size: 23px;
+    width: 160px;
 }
 
 .expenses_list__item_price{
